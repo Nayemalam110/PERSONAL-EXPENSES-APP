@@ -27,6 +27,8 @@ class _NewTransactionState extends State<NewTransaction> {
       enteredtitle,
       enteredamounth,
     );
+
+    Navigator.of(context).pop();
   }
 
   @override
@@ -46,9 +48,13 @@ class _NewTransactionState extends State<NewTransaction> {
               keyboardType: TextInputType.number,
               onSubmitted: (_) => submitData(),
             ),
+            SizedBox(
+              height: 20,
+            ),
             TextButton(
               child: Text('Add'),
               onPressed: submitData,
+              style: TextButton.styleFrom(backgroundColor: Colors.amber),
             ),
           ],
         ));
