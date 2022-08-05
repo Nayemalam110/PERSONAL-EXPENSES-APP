@@ -6,48 +6,44 @@ import 'package:personal_expence_app/transaction/transaction_list.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 void main() {
-  runApp(MaterialApp(
-    home: MyExpensesApp(),
-  ));
+  runApp(MyExpensesApp());
 }
 
-class MyExpensesApp extends StatefulWidget {
+class MyExpensesApp extends StatelessWidget {
   @override
-  State<MyExpensesApp> createState() => _MyExpensesAppState();
+  Widget build(BuildContext context) {
+    return (MaterialApp(
+        home: Home(),
+        themeMode: ThemeMode.light,
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSwatch(
+            primarySwatch: Colors.blue,
+          ).copyWith(
+            secondary: Colors.green,
+          ),
+          fontFamily: 'Quicksand',
+        ),
+        darkTheme: ThemeData(
+          brightness: Brightness.dark,
+          colorScheme: ColorScheme.dark(),
+          primaryColor: Colors.black,
+        )));
+  }
 }
 
-class _MyExpensesAppState extends State<MyExpensesApp> {
+class Home extends StatefulWidget {
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
   final List<Transaction> _userTransaction = [
-    Transaction(
-      amount: 1200,
-      date: DateTime.now(),
-      id: 't1',
-      title: 'New shoes',
-    ),
-    Transaction(
-      amount: 1100,
-      date: DateTime.now(),
-      id: 't2',
-      title: 'New cloths',
-    ),
-    Transaction(
-      amount: 1100,
-      date: DateTime.now(),
-      id: 't2',
-      title: 'New cloths',
-    ),
-    Transaction(
-      amount: 1100,
-      date: DateTime.now(),
-      id: 't2',
-      title: 'New cloths',
-    ),
-    Transaction(
-      amount: 1100,
-      date: DateTime.now(),
-      id: 't2',
-      title: 'New cloths',
-    ),
+    // Transaction(
+    //   amount: 1200,
+    //   date: DateTime.now(),
+    //   id: 't1',
+    //   title: 'New shoes',
+    // ),
   ];
   addlist(title, double amount) {
     final addList = Transaction(
@@ -66,10 +62,9 @@ class _MyExpensesAppState extends State<MyExpensesApp> {
       context: ctx,
       builder: (_) {
         return Container(
-          alignment: Alignment(0, 0),
           width: double.infinity,
           color: Color.fromARGB(255, 72, 100, 73),
-          height: 500,
+          height: 300,
           child: NewTransaction(addlist),
         );
       },
@@ -80,7 +75,9 @@ class _MyExpensesAppState extends State<MyExpensesApp> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Expenses'),
+        title: const Text(
+          'Expenses',
+        ),
       ),
       body: SingleChildScrollView(
         child: Card(
@@ -91,7 +88,9 @@ class _MyExpensesAppState extends State<MyExpensesApp> {
                 width: double.infinity,
                 color: Colors.amber,
                 child: const Card(
-                  child: Text('New test'),
+                  child: Text(
+                    'New test',
+                  ),
                 ),
               ),
               Transaction_list(_userTransaction),
