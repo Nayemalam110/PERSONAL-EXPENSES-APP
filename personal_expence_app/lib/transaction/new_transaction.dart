@@ -54,7 +54,7 @@ class _NewTransactionState extends State<NewTransaction> {
     return SingleChildScrollView(
       child: Container(
           padding:
-              const EdgeInsets.only(top: 10, left: 10, right: 10, bottom: 50),
+              const EdgeInsets.only(top: 10, left: 15, right: 15, bottom: 10),
           child: Column(
             children: [
               TextField(
@@ -69,17 +69,23 @@ class _NewTransactionState extends State<NewTransaction> {
                 onSubmitted: (_) => submitData(),
               ),
               const SizedBox(
-                height: 5,
+                height: 10,
               ),
-              OutlinedButton(
-                  onPressed: datepiker, child: const Text('Choose date')),
-              const SizedBox(
-                height: 5,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  OutlinedButton(
+                      onPressed: datepiker, child: const Text('Choose date')),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  OutlinedButton(
+                    onPressed: submitData,
+                    child: const Text('Add Transaction'),
+                  ),
+                ],
               ),
-              OutlinedButton(
-                onPressed: submitData,
-                child: const Text('Add Transaction'),
-              ),
+              SizedBox(height: 15),
             ],
           )),
     );

@@ -87,7 +87,7 @@ class _HomeState extends State<Home> {
       builder: (_) {
         return SizedBox(
           width: double.infinity,
-          height: MediaQuery.of(context).viewInsets.bottom + 300,
+          height: MediaQuery.of(context).viewInsets.bottom + 210,
           child: NewTransaction(addlist),
         );
       },
