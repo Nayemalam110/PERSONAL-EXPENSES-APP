@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:personal_expence_app/models/transaction.dart';
 
 class NewTransaction extends StatefulWidget {
-  Function addlist;
+  final Function addlist;
 
-  NewTransaction(this.addlist);
+  const NewTransaction(this.addlist, {Key? key}) : super(key: key);
 
   @override
   State<NewTransaction> createState() => _NewTransactionState();
@@ -14,6 +13,24 @@ class _NewTransactionState extends State<NewTransaction> {
   final titlecontroller = TextEditingController();
 
   final amountcontroller = TextEditingController();
+
+  late DateTime selectedate;
+
+  void datepiker() {
+    showDatePicker(
+            context: context,
+            initialDate: DateTime.now(),
+            firstDate: DateTime(2022, 1, 1),
+            lastDate: DateTime.now())
+        .then((value) {
+      if (value == null) {
+        return;
+      }
+      setState(() {
+        selectedate = value;
+      });
+    });
+  }
 
   void submitData() {
     final enteredtitle = titlecontroller.text;
@@ -26,6 +43,7 @@ class _NewTransactionState extends State<NewTransaction> {
     widget.addlist(
       enteredtitle,
       enteredamounth,
+      selectedate,
     );
 
     Navigator.of(context).pop();
@@ -34,27 +52,30 @@ class _NewTransactionState extends State<NewTransaction> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        padding: EdgeInsets.all(10),
+        padding: const EdgeInsets.all(10),
         child: Column(
           children: [
             TextField(
-              decoration: InputDecoration(labelText: 'Title'),
+              decoration: const InputDecoration(labelText: 'Title'),
               controller: titlecontroller,
               onSubmitted: (_) => submitData(),
             ),
             TextField(
-              decoration: InputDecoration(labelText: 'Amount'),
+              decoration: const InputDecoration(labelText: 'Amount'),
               controller: amountcontroller,
               keyboardType: TextInputType.number,
               onSubmitted: (_) => submitData(),
             ),
-            SizedBox(
+            const SizedBox(
+              height: 20,
+            ),
+            TextButton(onPressed: datepiker, child: const Text('Choose date')),
+            const SizedBox(
               height: 20,
             ),
             TextButton(
-              child: Text('Add'),
               onPressed: submitData,
-              style: TextButton.styleFrom(backgroundColor: Colors.amber),
+              child: const Text('Add'),
             ),
           ],
         ));

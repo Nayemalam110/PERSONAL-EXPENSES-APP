@@ -8,14 +8,17 @@ import 'package:personal_expence_app/transaction/transaction_list.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 void main() {
-  runApp(MyExpensesApp());
+  runApp(const MyExpensesApp());
 }
 
 class MyExpensesApp extends StatelessWidget {
+  const MyExpensesApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return (MaterialApp(
-        home: Home(),
+        debugShowCheckedModeBanner: false,
+        home: const Home(),
         themeMode: ThemeMode.light,
         theme: ThemeData(
           colorScheme: ColorScheme.fromSwatch(
@@ -27,13 +30,15 @@ class MyExpensesApp extends StatelessWidget {
         ),
         darkTheme: ThemeData(
           brightness: Brightness.dark,
-          colorScheme: ColorScheme.dark(),
+          colorScheme: const ColorScheme.dark(),
           primaryColor: Colors.black,
         )));
   }
 }
 
 class Home extends StatefulWidget {
+  const Home({Key? key}) : super(key: key);
+
   @override
   State<Home> createState() => _HomeState();
 }
@@ -52,16 +57,16 @@ class _HomeState extends State<Home> {
     return _userTransaction.where((tx) {
       return tx.date.isAfter(
         DateTime.now().subtract(
-          Duration(days: 7),
+          const Duration(days: 7),
         ),
       );
     }).toList();
   }
 
-  addlist(title, double amount) {
+  addlist(title, double amount, DateTime selectedDate) {
     final addList = Transaction(
       amount: amount,
-      date: DateTime.now(),
+      date: selectedDate,
       id: DateTime.now().toString(),
       title: title,
     );
@@ -70,13 +75,18 @@ class _HomeState extends State<Home> {
     });
   }
 
+  deletelist(String id) {
+    setState(() {
+      _userTransaction.removeWhere((element) => element.id == id);
+    });
+  }
+
   void _showModelSheet(BuildContext ctx) {
     showBarModalBottomSheet(
       context: ctx,
       builder: (_) {
-        return Container(
+        return SizedBox(
           width: double.infinity,
-          color: Color.fromARGB(255, 72, 100, 73),
           height: 300,
           child: NewTransaction(addlist),
         );
@@ -99,16 +109,15 @@ class _HomeState extends State<Home> {
               Container(
                 alignment: Alignment.center,
                 width: double.infinity,
-                color: Colors.amber,
                 child: Chart(_recenttransactions),
               ),
-              Transaction_list(_userTransaction),
+              TransactionList(_userTransaction, deletelist),
             ],
           ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
         onPressed: () => _showModelSheet(context),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,

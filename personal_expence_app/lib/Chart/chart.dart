@@ -5,7 +5,7 @@ import 'package:intl/intl.dart';
 
 class Chart extends StatelessWidget {
   final List<Transaction> _recenttransaction;
-  Chart(this._recenttransaction);
+  const Chart(this._recenttransaction);
 
   List<Map<String, Object>> get groupTrasection {
     return List.generate(7, (index) {
@@ -36,18 +36,24 @@ class Chart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(groupTrasection);
-    print(totalspending);
-
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: groupTrasection.map((e) {
-        return ChartBar(
-          e['day'] as String,
-          e['amount'] as double,
-          (e['amount'] as double) / totalspending,
-        );
-      }).toList(),
+    return Card(
+      elevation: 5,
+      margin: const EdgeInsets.all(10),
+      child: Padding(
+        padding: const EdgeInsets.all(10),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: groupTrasection.map((e) {
+            return ChartBar(
+              e['day'] as String,
+              e['amount'] as double,
+              totalspending == 0
+                  ? 0.00
+                  : (e['amount'] as double) / totalspending,
+            );
+          }).toList(),
+        ),
+      ),
     );
   }
 }

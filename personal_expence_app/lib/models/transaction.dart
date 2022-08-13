@@ -1,5 +1,3 @@
-import 'package:flutter/cupertino.dart';
-
 class Transaction {
   final String title;
   final String id;

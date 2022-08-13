@@ -1,17 +1,27 @@
 import 'package:flutter/material.dart';
 
 class ChartBar extends StatelessWidget {
-  String label;
-  double sendeingAmouth;
-  double sepedingPracetage;
+  final String label;
+  final double sendeingAmouth;
+  final double sepedingPracetage;
 
-  ChartBar(this.label, this.sendeingAmouth, this.sepedingPracetage);
+  const ChartBar(this.label, this.sendeingAmouth, this.sepedingPracetage,
+      {Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Text(label),
+        SizedBox(
+          height: 20,
+          child: FittedBox(
+            child: Text('\$${sendeingAmouth.toStringAsFixed(0)}'),
+          ),
+        ),
+        const SizedBox(
+          height: 5,
+        ),
         Container(
           height: 60,
           width: 10,
@@ -19,20 +29,27 @@ class ChartBar extends StatelessWidget {
           child: Stack(
             children: [
               Container(
-                color: Colors.red,
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.grey, width: 1.0),
+                  borderRadius: BorderRadius.circular(10),
+                ),
               ),
               FractionallySizedBox(
                 heightFactor: (1 - sepedingPracetage),
                 child: Container(
-                  color: Colors.black,
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).primaryColor,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
                 ),
               )
             ],
           ),
         ),
-        Text(
-          '$sendeingAmouth',
+        const SizedBox(
+          height: 5,
         ),
+        Text(label),
       ],
     );
   }
