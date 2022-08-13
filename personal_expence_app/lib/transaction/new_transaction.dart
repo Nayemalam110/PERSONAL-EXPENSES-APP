@@ -51,33 +51,37 @@ class _NewTransactionState extends State<NewTransaction> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        padding: const EdgeInsets.all(10),
-        child: Column(
-          children: [
-            TextField(
-              decoration: const InputDecoration(labelText: 'Title'),
-              controller: titlecontroller,
-              onSubmitted: (_) => submitData(),
-            ),
-            TextField(
-              decoration: const InputDecoration(labelText: 'Amount'),
-              controller: amountcontroller,
-              keyboardType: TextInputType.number,
-              onSubmitted: (_) => submitData(),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            TextButton(onPressed: datepiker, child: const Text('Choose date')),
-            const SizedBox(
-              height: 20,
-            ),
-            TextButton(
-              onPressed: submitData,
-              child: const Text('Add'),
-            ),
-          ],
-        ));
+    return SingleChildScrollView(
+      child: Container(
+          padding:
+              const EdgeInsets.only(top: 10, left: 10, right: 10, bottom: 50),
+          child: Column(
+            children: [
+              TextField(
+                decoration: const InputDecoration(labelText: 'Title'),
+                controller: titlecontroller,
+                onSubmitted: (_) => submitData(),
+              ),
+              TextField(
+                decoration: const InputDecoration(labelText: 'Amount'),
+                controller: amountcontroller,
+                keyboardType: TextInputType.number,
+                onSubmitted: (_) => submitData(),
+              ),
+              const SizedBox(
+                height: 5,
+              ),
+              OutlinedButton(
+                  onPressed: datepiker, child: const Text('Choose date')),
+              const SizedBox(
+                height: 5,
+              ),
+              OutlinedButton(
+                onPressed: submitData,
+                child: const Text('Add Transaction'),
+              ),
+            ],
+          )),
+    );
   }
 }
