@@ -9,11 +9,6 @@ class ChartBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('sepedingAmount --');
-    print(sendeingAmouth);
-    print('sepedingPracetage --');
-    print(sepedingPracetage);
-
     return Column(
       children: [
         Text(label),
