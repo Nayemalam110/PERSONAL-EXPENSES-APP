@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:personal_expence_app/Chart/chart.dart';
+
 import 'package:personal_expence_app/models/transaction.dart';
 import 'package:personal_expence_app/transaction/new_transaction.dart';
 import 'package:personal_expence_app/transaction/transaction_list.dart';
@@ -45,6 +47,17 @@ class _HomeState extends State<Home> {
     //   title: 'New shoes',
     // ),
   ];
+
+  List<Transaction> get _recenttransactions {
+    return _userTransaction.where((tx) {
+      return tx.date.isAfter(
+        DateTime.now().subtract(
+          Duration(days: 7),
+        ),
+      );
+    }).toList();
+  }
+
   addlist(title, double amount) {
     final addList = Transaction(
       amount: amount,
@@ -87,11 +100,7 @@ class _HomeState extends State<Home> {
                 alignment: Alignment.center,
                 width: double.infinity,
                 color: Colors.amber,
-                child: const Card(
-                  child: Text(
-                    'New test',
-                  ),
-                ),
+                child: Chart(_recenttransactions),
               ),
               Transaction_list(_userTransaction),
             ],
