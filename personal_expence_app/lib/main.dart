@@ -85,10 +85,12 @@ class _HomeState extends State<Home> {
     showBarModalBottomSheet(
       context: ctx,
       builder: (_) {
-        return SizedBox(
-          width: double.infinity,
-          height: MediaQuery.of(context).viewInsets.bottom + 210,
-          child: NewTransaction(addlist),
+        return SingleChildScrollView(
+          child: SizedBox(
+            width: double.infinity,
+            height: MediaQuery.of(context).viewInsets.bottom + 210,
+            child: NewTransaction(addlist),
+          ),
         );
       },
     );

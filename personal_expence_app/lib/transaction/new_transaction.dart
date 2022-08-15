@@ -51,43 +51,41 @@ class _NewTransactionState extends State<NewTransaction> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Container(
-          padding:
-              const EdgeInsets.only(top: 10, left: 15, right: 15, bottom: 10),
-          child: Column(
-            children: [
-              TextField(
-                decoration: const InputDecoration(labelText: 'Title'),
-                controller: titlecontroller,
-                onSubmitted: (_) => submitData(),
-              ),
-              TextField(
-                decoration: const InputDecoration(labelText: 'Amount'),
-                controller: amountcontroller,
-                keyboardType: TextInputType.number,
-                onSubmitted: (_) => submitData(),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  OutlinedButton(
-                      onPressed: datepiker, child: const Text('Choose date')),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  OutlinedButton(
-                    onPressed: submitData,
-                    child: const Text('Add Transaction'),
-                  ),
-                ],
-              ),
-              SizedBox(height: 15),
-            ],
-          )),
-    );
+    return Container(
+        padding:
+            const EdgeInsets.only(top: 10, left: 15, right: 15, bottom: 10),
+        child: Column(
+          children: [
+            TextField(
+              decoration: const InputDecoration(labelText: 'Title'),
+              controller: titlecontroller,
+              onSubmitted: (_) => submitData(),
+            ),
+            TextField(
+              decoration: const InputDecoration(labelText: 'Amount'),
+              controller: amountcontroller,
+              keyboardType: TextInputType.number,
+              onSubmitted: (_) => submitData(),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                OutlinedButton(
+                    onPressed: datepiker, child: const Text('Choose date')),
+                const SizedBox(
+                  height: 5,
+                ),
+                OutlinedButton(
+                  onPressed: submitData,
+                  child: const Text('Add Transaction'),
+                ),
+              ],
+            ),
+            SizedBox(height: 5),
+          ],
+        ));
   }
 }
